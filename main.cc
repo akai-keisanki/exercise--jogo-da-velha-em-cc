@@ -21,7 +21,7 @@ protected:
     std::cout << ' ' << get_table_cell(i, 0) << " | " << get_table_cell(i, 1) << " | " << get_table_cell(i, 2) << ' ' << std::endl;
   }
 
-  void print_table (void)
+  void ui_print_table (void)
   {
     print_table_row(0);
     std::cout << "-----------" << std::endl;
@@ -70,6 +70,28 @@ protected:
     return test_result_for(x) ? 1 : test_result_for(o) ? 2 : test_draw() ? -1 : 0;
   }
 
+  void ui_request_position_for_x (void)
+  {
+    size_t p;
+    std::cout << std::endl << "Jogador 1 (X), escolha uma posição: ";
+    if (!(std::cin >> p && occupy_pos_w_x(p)))
+    {
+      std::cout << "Posição inválida ou já ocupada! Escolha outra posição." << std::endl;
+      ui_request_position_for_x();
+    }
+  }
+
+  void ui_request_position_for_o (void)
+  {
+    size_t p;
+    std::cout << std::endl << "Jogador 2 (O), escolha uma posição: ";
+    if (!(std::cin >> p && occupy_pos_w_o(p)))
+    {
+      std::cout << "Posição inválida ou já ocupada! Escolha outra posição." << std::endl;
+      ui_request_position_for_o();
+    }
+  }
+
   bool ui_game_end (void)
   {
     short r = test_result();
@@ -92,7 +114,7 @@ protected:
     return false;
   }
 
-  void restart_prompt (void)
+  void ui_restart_prompt (void)
   {
     char c;
 
@@ -125,13 +147,18 @@ public:
 
   void run_program_user_interface ()
   {
+    ui_print_table();
     do
     {
+      ui_request_position_for_x();
+      ui_print_table();
       if (ui_game_end()) break;
-    }
-    while (!ui_game_end());
 
-    restart_prompt();
+      ui_request_position_for_o();
+      ui_print_table();
+    } while (!ui_game_end());
+
+    ui_restart_prompt();
   }
 
 };
