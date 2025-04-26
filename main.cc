@@ -140,6 +140,12 @@ protected:
     }
   }
 
+  void init_data (void)
+  {
+    x.reset();
+    o.reset();
+  }
+
 public:
 
   TicTacToeProgram ()
@@ -147,6 +153,7 @@ public:
 
   void run_program_user_interface ()
   {
+    init_data();
     ui_print_table();
     do
     {
