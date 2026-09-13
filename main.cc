@@ -1,4 +1,4 @@
-#include <iostream>
+einclude <iostream>
 
 #include <bitset>
 
@@ -48,11 +48,11 @@ protected:
   {
     for (size_t i = 0; i < 3; i ++)
     {
-      if (x.test(i)     && x.test(3 + i)     && x.test(6 + i)
-      ||  x.test(3 * i) && x.test(3 * i + 1) && x.test(3 * i + 2)) return true;
+      if (b.test(i)     && b.test(3 + i)     && b.test(6 + i)
+      ||  b.test(3 * i) && b.test(3 * i + 1) && b.test(3 * i + 2)) return true;
     }
 
-    if (x.test(4) && (x.test(0) && x.test(8) || x.test(6) && x.test(2))) return true;
+    if (b.test(4) && (b.test(0) && b.test(8) || b.test(6) && b.test(2))) return true;
 
     return false;
   }
@@ -73,10 +73,12 @@ protected:
   void ui_request_position_for_x (void)
   {
     size_t p;
+    char c = 0;
     std::cout << std::endl << "Jogador 1 (X), escolha uma posição: ";
     if (!(std::cin >> p && occupy_pos_w_x(p)))
     {
       std::cout << "Posição inválida ou já ocupada! Escolha outra posição." << std::endl;
+      while (c != '\n') std::cin >> c;
       ui_request_position_for_x();
     }
   }
@@ -84,10 +86,12 @@ protected:
   void ui_request_position_for_o (void)
   {
     size_t p;
+    char c = 0;
     std::cout << std::endl << "Jogador 2 (O), escolha uma posição: ";
     if (!(std::cin >> p && occupy_pos_w_o(p)))
     {
       std::cout << "Posição inválida ou já ocupada! Escolha outra posição." << std::endl;
+      while (c != '\n') std::cin >> c;
       ui_request_position_for_o();
     }
   }
