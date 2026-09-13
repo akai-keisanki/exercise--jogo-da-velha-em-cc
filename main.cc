@@ -32,14 +32,14 @@ protected:
 
   bool occupy_pos_w_x (const size_t& i)
   {
-    if (i > 9 || o.test(i - 1)) return false;
+    if (i < 1 || i > 9 || o.test(i - 1)) return false;
     x.set(i - 1);
     return true;
   }
 
   bool occupy_pos_w_o (const size_t& i)
   {
-    if (i > 9 || x.test(i - 1)) return false;
+    if (i < 1 || i > 9 || x.test(i - 1)) return false;
     o.set(i - 1);
     return true;
   }
